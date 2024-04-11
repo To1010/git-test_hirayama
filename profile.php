@@ -21,11 +21,17 @@
             <input type="text" id="name" name="name" required><br>
             <label for="email">メールアドレス:</label>
             <input type="email" id="email" name="email" required><br>
+            <label for="subject">宛先:</label>
+            <select id="subject" name="subject" required>
+                <option value="trainee">訓練生</option>
+                <option value="assistant">あなたの名前</option>
+            </select><br>
             <label for="message">メッセージ:</label><br>
             <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
             <input type="submit" value="送信">
         </form>
     </section>
+
     <section>
         <h2>今日のコメント</h2>
         <?php
@@ -96,10 +102,7 @@
             return $data;
         }
         ?>
-
     </section>
-
-
 </body>
 
 </html>
