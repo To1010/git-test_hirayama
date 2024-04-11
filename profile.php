@@ -11,6 +11,7 @@
 <body>
     <section>
         <h2>プロフィール・自己紹介</h2>
+        <h3>Hirayama</h3>
         <img src="./img/スクリーンショット 2024-03-06 171748.png" alt="Your Photo">
         <p>ザックリとした状態でごめんなさい(m´・ω・｀)m ｺﾞﾒﾝ…</p>
     </section>
