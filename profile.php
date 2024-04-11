@@ -43,7 +43,7 @@
         // データベースへの接続情報
         $servername = "localhost";
         $username = "root";
-        $password = "root";
+        $password = "";
         $dbname = "git_test";
 
         // データベースに接続

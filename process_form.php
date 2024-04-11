@@ -2,7 +2,7 @@
 // データベースの接続情報
 $servername = "localhost"; // ホスト名
 $username = "root"; // ユーザー名
-$password = "root"; // パスワード
+$password = ""; // パスワード
 $dbname = "git_test"; // データベース名
 
 // フォームからのデータを取得
@@ -11,15 +11,6 @@ $email = $_POST['email'];
 $subject = $_POST['subject']; // フォームから選択された宛先の識別子
 $message = $_POST['message'];
 
-// 宛先の識別子を保存する
-if ($subject === 'trainee') {
-    $subject_id = 'trainee'; // 平山さん宛の識別子
-} else if ($subject === 'assistant') {
-    $subject_id = 'assistant'; // 梅田宛の識別子
-} else {
-    // デフォルトの処理（適切な処理を追加してください）
-    $subject_id = ''; // 何も選択されていない場合の識別子
-}
 
 // データベースに接続
 $conn = new mysqli($servername, $username, $password, $dbname);
