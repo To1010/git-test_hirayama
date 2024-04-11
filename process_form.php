@@ -8,7 +8,9 @@ $dbname = "git_test"; // データベース名
 // フォームからのデータを取得
 $name = $_POST['name'];
 $email = $_POST['email'];
+$subject = $_POST['subject']; // フォームから選択された宛先の識別子
 $message = $_POST['message'];
+
 
 // データベースに接続
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -19,18 +21,30 @@ if ($conn->connect_error) {
 }
 
 // データを挿入するクエリ
-$sql = "INSERT INTO comments (name, email, message, created_at) VALUES ('$name', '$email', '$message', NOW())";
+$sql = "INSERT INTO comments (name, email, subject, message, subject_id, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
 
-// クエリを実行して結果をチェック
-if ($conn->query($sql) === TRUE) {
+// プリペアドステートメントを作成
+$stmt = $conn->prepare($sql);
+if (!$stmt) {
+    die("エラー: " . $conn->error);
+}
+
+// パラメータをバインドしてクエリを実行
+$stmt->bind_param("sssss", $name, $email, $subject, $message, $subject_id);
+$result = $stmt->execute();
+if ($result) {
     echo "データが正常に挿入されました";
 } else {
-    echo "エラー: " . $sql . "<br>" . $conn->error;
+    echo "エラー: " . $stmt->error;
 }
+
+// ステートメントをクローズ
+$stmt->close();
 
 // データベース接続を閉じる
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ja">

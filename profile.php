@@ -21,19 +21,19 @@
     <section>
         <h2>お問い合わせフォーム</h2>
         <form action="process_form.php" method="post">
-            <label for="name">名前:</label>
-            <input type="text" id="name" name="name" required><br>
-            <label for="email">メールアドレス:</label>
-            <input type="email" id="email" name="email" required><br>
-            <label for="subject">宛先:</label>
-            <select id="subject" name="subject" required>
-                <option value="trainee">平山さん宛</option>
-                <option value="assistant">梅田宛</option>
-            </select><br>
-            <label for="message">メッセージ:</label><br>
-            <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
-            <input type="submit" value="送信">
-        </form>
+    <label for="name">名前:</label>
+    <input type="text" id="name" name="name" required><br>
+    <label for="email">メールアドレス:</label>
+    <input type="email" id="email" name="email" required><br>
+    <label for="subject">宛先:</label>
+    <select id="subject" name="subject" required>
+    <option value="平山さん宛">平山さん宛</option>
+        <option value="梅田宛">梅田宛</option>
+    </select><br>
+    <label for="message">メッセージ:</label><br>
+    <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
+    <input type="submit" value="送信">
+</form>
     </section>
 
     <section>
@@ -55,25 +55,27 @@
         }
 
         // コメントを取得するクエリ
-        $sql = "SELECT * FROM comments";
+        $sql = "SELECT name, subject, message FROM comments";
 
         // クエリを実行して結果を取得
         $result = $conn->query($sql);
-
+        
         // 結果があるかどうかをチェックして表示
         if ($result->num_rows > 0) {
             // データがある場合は表示
             while ($row = $result->fetch_assoc()) {
                 echo "Name: " . $row["name"] . "<br>";
+                echo "宛先: " . $row["subject"] . "<br>"; // 宛先を表示
                 echo "ひとこと: " . $row["message"] . "<br><br>";
             }
         } else {
             echo "コメントはありません";
         }
-
+        
         // データベース接続を閉じる
         $conn->close();
         ?>
+
         <?php
         $nameErr = $emailErr = $messageErr = "";
         $name = $email = $message = "";
