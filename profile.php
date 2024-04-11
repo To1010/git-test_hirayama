@@ -14,6 +14,9 @@
         <h3>Hirayama</h3>
         <img src="./img/スクリーンショット 2024-03-06 171748.png" alt="Your Photo">
         <p>ザックリとした状態でごめんなさい(m´・ω・｀)m ｺﾞﾒﾝ…</p>
+        <h3>Umeda</h3>
+        <img src="./img/umeda.png" alt="umeda Photo">
+        <p>梅田綾夏です</p>
     </section>
     <section>
         <h2>お問い合わせフォーム</h2>
@@ -24,8 +27,8 @@
             <input type="email" id="email" name="email" required><br>
             <label for="subject">宛先:</label>
             <select id="subject" name="subject" required>
-                <option value="trainee">訓練生</option>
-                <option value="assistant">あなたの名前</option>
+                <option value="trainee">平山さん宛</option>
+                <option value="assistant">梅田宛</option>
             </select><br>
             <label for="message">メッセージ:</label><br>
             <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
