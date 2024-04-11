@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 }
 
 // データを挿入するクエリ
-$sql = "INSERT INTO comments (name, email, subject, message, subject_id, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
+$sql = "INSERT INTO comments (name, email, subject, message, created_at) VALUES (?, ?, ?, ?, NOW())";
 
 // プリペアドステートメントを作成
 $stmt = $conn->prepare($sql);
@@ -30,7 +30,8 @@ if (!$stmt) {
 }
 
 // パラメータをバインドしてクエリを実行
-$stmt->bind_param("sssss", $name, $email, $subject, $message, $subject_id);
+$stmt->bind_param("ssss", $name, $email, $subject, $message); // 5つ目の?が削除されました
+
 $result = $stmt->execute();
 if ($result) {
     echo "データが正常に挿入されました";
