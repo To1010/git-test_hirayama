@@ -9,31 +9,48 @@
 </head>
 
 <body>
-    <section>
-        <h2>プロフィール・自己紹介</h2>
-        <h3>Hirayama</h3>
-        <img src="./img/スクリーンショット 2024-03-06 171748.png" alt="Your Photo">
-        <p>ザックリとした状態でごめんなさい(m´・ω・｀)m ｺﾞﾒﾝ…</p>
-        <h3>Umeda</h3>
-        <img src="./img/umeda.png" alt="umeda Photo">
-        <p>梅田綾夏です</p>
+    <h1>Git・SQL・PHP test</h1>
+    <section class="profile">
+    <h2>プロフィール</h2>
+        <div class="profile-content">
+            <div class="p-1">
+            <h3>Hirayama</h3>
+            <p>長崎県在住のナマケモノです<br>日向ぼっこしたい (・ω・)ノ</p>
+            </div>
+            <div class="p-2">
+            <img src="./img/スクリーンショット 2024-03-06 171748.png" alt="Your Photo">
+            </div>
+        </div>
     </section>
+    <section class="profile">
+    <h2>プロフィール</h2>
+        <div class="profile-content">
+        <div class="p-1">
+            <h3>Umeda</h3>
+            <p>梅田綾夏です</p>
+            </div>
+            <div class="p-2">
+            <img src="./img/umeda.png" alt="umeda Photo">
+            </div>
+        </div>
+    </section>
+
     <section>
         <h2>お問い合わせフォーム</h2>
         <form action="process_form.php" method="post">
-    <label for="name">名前:</label>
-    <input type="text" id="name" name="name" required><br>
-    <label for="email">メールアドレス:</label>
-    <input type="email" id="email" name="email" required><br>
-    <label for="subject">宛先:</label>
-    <select id="subject" name="subject" required>
-    <option value="平山さん宛">平山さん宛</option>
-        <option value="梅田宛">梅田宛</option>
-    </select><br>
-    <label for="message">メッセージ:</label><br>
-    <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
-    <input type="submit" value="送信">
-</form>
+            <label for="name">名前:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="email">メールアドレス:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="subject">宛先:</label>
+            <select id="subject" name="subject" required>
+                <option value="平山さん宛">平山さん宛</option>
+                <option value="梅田宛">梅田宛</option>
+            </select><br>
+            <label for="message">メッセージ:</label><br>
+            <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
+            <input type="submit" value="送信">
+        </form>
     </section>
 
     <section>
@@ -59,7 +76,7 @@
 
         // クエリを実行して結果を取得
         $result = $conn->query($sql);
-        
+
         // 結果があるかどうかをチェックして表示
         if ($result->num_rows > 0) {
             // データがある場合は表示
@@ -71,7 +88,7 @@
         } else {
             echo "コメントはありません";
         }
-        
+
         // データベース接続を閉じる
         $conn->close();
         ?>
