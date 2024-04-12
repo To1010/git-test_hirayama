@@ -1,51 +1,39 @@
 <?php
-// データベースの接続情報
-$servername = "localhost"; // ホスト名
-$username = "root"; // ユーザー名
-$password = ""; // パスワード
-$dbname = "git_test"; // データベース名
+require('db_connect.php'); // データベースへの接続情報を含むファイルを読み込む
 
-// フォームからのデータを取得
-$name = $_POST['name'];
-$email = $_POST['email'];
-$subject = $_POST['subject']; // フォームから選択された宛先の識別子
-$message = $_POST['message'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // フォームからのデータを取得
+    $name = isset($_POST['name']) ? $_POST['name'] : ''; // isset関数を使用してキーが存在するか確認し、存在する場合に値を取得する
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $subject = isset($_POST['subject']) ? $_POST['subject'] : ''; // isset関数を使用してキーが存在するか確認し、存在する場合に値を取得する
+    $message = isset($_POST['message']) ? $_POST['message'] : '';
 
+    // データを挿入するクエリ
+    $sql = "INSERT INTO comments (name, email, subject, message, created_at) VALUES (?, ?, ?, ?, NOW())";
 
-// データベースに接続
-$conn = new mysqli($servername, $username, $password, $dbname);
+    // プリペアドステートメントを作成
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("エラー: " . $conn->error);
+    }
 
-// 接続を確認
-if ($conn->connect_error) {
-    die("接続に失敗しました: " . $conn->connect_error);
+    // パラメータをバインドしてクエリを実行
+    $stmt->bind_param("ssss", $name, $email, $subject, $message);
+
+    $result = $stmt->execute();
+    if ($result) {
+        echo "";
+    } else {
+        echo "エラー: " . $stmt->error;
+    }
+
+    // ステートメントをクローズ
+    $stmt->close();
 }
-
-// データを挿入するクエリ
-$sql = "INSERT INTO comments (name, email, subject, message, created_at) VALUES (?, ?, ?, ?, NOW())";
-
-// プリペアドステートメントを作成
-$stmt = $conn->prepare($sql);
-if (!$stmt) {
-    die("エラー: " . $conn->error);
-}
-
-// パラメータをバインドしてクエリを実行
-$stmt->bind_param("ssss", $name, $email, $subject, $message); // 5つ目の?が削除されました
-
-$result = $stmt->execute();
-if ($result) {
-    echo "データが正常に挿入されました";
-} else {
-    echo "エラー: " . $stmt->error;
-}
-
-// ステートメントをクローズ
-$stmt->close();
 
 // データベース接続を閉じる
 $conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -58,9 +46,8 @@ $conn->close();
 
 <body>
     <section>
-       <img src="img/22780470.jpg" width="500" height="500">
-
-        <a href="profile.php">プロフィール画面に戻る</a>
+        <img src="img/22780470.jpg" width="500" height="500">
+        <a href="profile.php">戻る</a>
     </section>
 </body>
 

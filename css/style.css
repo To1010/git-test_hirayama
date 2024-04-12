@@ -1,76 +1,122 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
 }
+
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 section {
-    margin: auto;
-    width: 50%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    text-align: center;
+  margin: auto;
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .profile {
-    display: grid;
-    justify-content: space-around; /* 要素をコンテナ内で均等に配置 */
-    align-items: center; /* アイテムを垂直方向に中央揃え */
+  display: grid;
+  justify-content: space-around;
+  /* 要素をコンテナ内で均等に配置 */
+  align-items: center;
+  /* アイテムを垂直方向に中央揃え */
 }
 
 .profile img {
-    display: inline-block; /* ブロック要素として配置 */
-    max-width: 50%; /* 画像の幅を調整 */
-    height: auto;
-    border-radius: 5px;
-    box-shadow: 8px 8px lightblue;
+  display: inline-block;
+  /* ブロック要素として配置 */
+  max-width: 50%;
+  /* 画像の幅を調整 */
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 8px 8px lightblue;
 }
 
 h2 {
- text-align: center;
+  text-align: center;
 }
+
 .profile-content {
-    display: flex;
-    flex-direction: row-reverse; /* 要素を横方向に逆順に配置 */
-    justify-content: center; /* アイテムを左右に配置 */
-    align-items: center; /* アイテムを垂直方向に中央揃え */
+  display: flex;
+  flex-direction: row-reverse;
+  /* 要素を横方向に逆順に配置 */
+  justify-content: center;
+  /* アイテムを左右に配置 */
+  align-items: center;
+  /* アイテムを垂直方向に中央揃え */
 }
 
 .p-1 {
-    width: 50%; /* 50%の幅 */
-    margin-left: 20px; /* 右側のマージンを追加 */
+  width: 50%;
+  /* 50%の幅 */
+  margin-left: 20px;
+  /* 右側のマージンを追加 */
 }
 
 .p-2 {
-    width: 50%; /* 50%の幅 */
-    margin-right: 20px; /* 左側のマージンを追加 */
-    text-align: center;
+  width: 50%;
+  /* 50%の幅 */
+  margin-right: 20px;
+  /* 左側のマージンを追加 */
+  text-align: center;
 }
 
 .profile-content h3 {
-    margin-bottom: 30px; /* 余白を削除 */
+  margin-bottom: 30px;
+  /* 余白を削除 */
 }
 
 .profile-content p {
-    margin: 0; /* 余白を削除 */
-    .profile-content {
+  margin: 0;
+  /* 余白を削除 */
+}
+.profile-content {
     display: flex;
-    flex-direction: row-reverse; /* 要素を横方向に逆順に配置 */
-    justify-content: center; /* アイテムを左右に配置 */
-    align-items: center; /* アイテムを垂直方向に中央揃え */
-}
+    flex-direction: row-reverse;
+    /* 要素を横方向に逆順に配置 */
+    justify-content: center;
+    /* アイテムを左右に配置 */
+    align-items: center;
+    /* アイテムを垂直方向に中央揃え */
+  }
 
+  .form {
+    text-align: left;
+    width: 50%; /* Adjust width as needed */
+    margin: 0 auto; /* Center align the form */
+    padding: 20px; /* Add padding around the form */
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .form-group label {
+    display: inline-block;
+    width: 120px; /* Adjust as needed */
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: calc(100% - 120px); /* Adjust as needed */
+  }
+  
+footer a {
+    align-items: center;
+    /* アイテムを垂直方向に中央揃え */
 }
+  
+  
