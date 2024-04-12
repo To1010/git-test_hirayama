@@ -11,84 +11,70 @@
 <body>
     <h1>Git・SQL・PHP test</h1>
     <section class="profile">
-    <h2>プロフィール</h2>
+        <h2>プロフィール</h2>
         <div class="profile-content">
             <div class="p-1">
-            <h3>Hirayama</h3>
-            <p>長崎県在住のナマケモノです<br>日向ぼっこしたい (・ω・)ノ</p>
+                <h3>Hirayama</h3>
+                <p>長崎県在住のナマケモノです<br>日向ぼっこしたい (・ω・)ノ</p>
             </div>
             <div class="p-2">
-            <img src="./img/スクリーンショット 2024-03-06 171748.png" alt="Your Photo">
+                <img src="./img/スクリーンショット 2024-03-06 171748.png" alt="Your Photo">
             </div>
         </div>
     </section>
     <section class="profile">
-    <h2>プロフィール</h2>
+        <h2>プロフィール</h2>
         <div class="profile-content">
-        <div class="p-1">
-            <h3>Umeda</h3>
-            <p>梅田綾夏です</p>
+            <div class="p-1">
+                <h3>Umeda</h3>
+                <p>梅田綾夏です</p>
             </div>
             <div class="p-2">
-            <img src="./img/umeda.png" alt="umeda Photo">
+                <img src="./img/umeda.png" alt="umeda Photo">
             </div>
         </div>
     </section>
 
     <section>
         <h2>お問い合わせフォーム</h2>
-        <form action="process_form.php" method="post">
-            <label for="name">名前:</label>
-            <input type="text" id="name" name="name" required><br>
-            <label for="email">メールアドレス:</label>
-            <input type="email" id="email" name="email" required><br>
-            <label for="subject">宛先:</label>
-            <select id="subject" name="subject" required>
-                <option value="平山さん宛">平山さん宛</option>
-                <option value="梅田宛">梅田宛</option>
-            </select><br>
-            <label for="message">メッセージ:</label><br>
-            <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
-            <input type="submit" value="送信">
-        </form>
+        <div class="form">
+            <form action="process_form.php" method="post">
+                <label for="subject">宛 先: </label>
+                <select id="subject" name="subject" required>
+                    <option value="平山さん宛">平山さん宛</option>
+                    <option value="梅田宛">梅田宛</option>
+                </select><br>
+                <label for="name">名 前: </label>
+                <input type="text" id="name" name="name" required><br>
+                <label for="email">email: </label>
+                <input type="email" id="email" name="email" required><br>
+                <label for="message">メッセージ:　　　　</label><br>
+                <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
+                <input type="submit" value="送信">
+            </form>
+        </div>
     </section>
 
     <section>
         <h2>今日のコメント</h2>
         <?php
         // DBからコメントを取得して表示する処理
-        // データベースへの接続情報
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "git_test";
+        require('db_connect.php'); // Include the file that establishes the database connection
 
-        // データベースに接続
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        $currentDate = date("Y-m-d");
+        $sql = "SELECT name, subject, message FROM comments WHERE DATE(created_at) = '$currentDate' ORDER BY id DESC";
 
-        // 接続を確認
-        if ($conn->connect_error) {
-            die("接続に失敗しました: " . $conn->connect_error);
-        }
-
-        // コメントを取得するクエリ
-        $sql = "SELECT name, subject, message FROM comments";
-
-        // クエリを実行して結果を取得
         $result = $conn->query($sql);
 
-        // 結果があるかどうかをチェックして表示
         if ($result->num_rows > 0) {
-            // データがある場合は表示
             while ($row = $result->fetch_assoc()) {
+                echo "宛先: " . $row["subject"] . " ";
                 echo "Name: " . $row["name"] . "<br>";
-                echo "宛先: " . $row["subject"] . "<br>"; // 宛先を表示
                 echo "ひとこと: " . $row["message"] . "<br><br>";
             }
         } else {
-            echo "コメントはありません";
+            echo "今日のコメントはありません";
         }
-
         // データベース接続を閉じる
         $conn->close();
         ?>
@@ -126,6 +112,9 @@
         }
         ?>
     </section>
+    <div class="footer">
+        <a href="prior_comments.php" class="button">昨日までのコメントを表示する</a>
+    </div>
 </body>
 
 </html>
