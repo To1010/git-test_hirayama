@@ -31,9 +31,9 @@
         }
         ?>
     </section>
-    <footer>
-    <a href="profile.php">戻る</a>
-    </footer>
+    <div class="footer">
+    <a href="profile.php" class="button">戻る</a>
+    </div>
 </body>
 
 </html>

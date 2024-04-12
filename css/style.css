@@ -114,9 +114,35 @@ h2 {
     width: calc(100% - 120px); /* Adjust as needed */
   }
   
-footer a {
+  .footer {
+    display: flex;
+    justify-content: center; /* 横方向（X軸）中央揃え */
+    align-items: center; /* 縦方向（Y軸）中央揃え */
+    padding-bottom: 50px;
+}
+.button {
     align-items: center;
     /* アイテムを垂直方向に中央揃え */
-}
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: hsl(229, 96%, 62%);
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 影の設定 */
+        box-shadow: 8px 8px lightblue;
+        transition: 0.3s; /* ホバー時のトランジション */
+        
+      }
+      
+      .button:hover {
+        background-color: hwb(229 64% 1%); /* ホバー時の背景色 */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* ホバー時の影の設定 */
+      }
+      
+
   
   

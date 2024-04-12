@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="./css/style.css">
+
 <?php
 require('db_connect.php'); // データベースへの接続情報を含むファイルを読み込む
 
@@ -47,7 +49,10 @@ $conn->close();
 <body>
     <section>
         <img src="img/22780470.jpg" width="500" height="500">
-        <a href="profile.php">戻る</a>
+
+        <div class="footer">
+        <a href="profile.php" class="button">戻る</a>
+        </div>
     </section>
 </body>
 

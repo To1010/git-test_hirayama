@@ -112,9 +112,9 @@
         }
         ?>
     </section>
-    <footer>
-        <a href="prior_comments.php">昨日までのコメントを表示する</a>
-    </footer>
+    <div class="footer">
+        <a href="prior_comments.php" class="button">昨日までのコメントを表示する</a>
+    </div>
 </body>
 
 </html>
