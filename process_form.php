@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $subject = isset($_POST['subject']) ? $_POST['subject'] : ''; // isset関数を使用してキーが存在するか確認し、存在する場合に値を取得する
     $message = isset($_POST['message']) ? $_POST['message'] : '';
-
+    
     // データを挿入するクエリ
     $sql = "INSERT INTO comments (name, email, subject, message, created_at) VALUES (?, ?, ?, ?, NOW())";
 
