@@ -39,17 +39,17 @@
         <h2>お問い合わせフォーム</h2>
         <div class="form">
             <form action="process_form.php" method="post">
-                <label for="subject">宛 先: </label>
+                <label for="subject">To: </label>
                 <select id="subject" name="subject" required>
-                    <option value="平山さん宛">平山さん宛</option>
-                    <option value="梅田宛">梅田宛</option>
+                    <option value="平山さんへ">平山さんへ</option>
+                    <option value="梅田へ">梅田へ</option>
                 </select><br>
-                <label for="name">名 前: </label>
-                <input type="text" id="name" name="name" required><br>
-                <label for="email">email: </label>
-                <input type="email" id="email" name="email" required><br>
-                <label for="message">メッセージ:　　　　</label><br>
-                <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
+                <label for="name">From: </label>
+                <input type="text" id="name" name="name" placeholder="Name" required><br>
+                <label for="email">Email: </label>
+                <input type="email" id="email" name="email" placeholder="xxx@xxxxx" required><br>
+                <label for="message">Message:　　　　</label><br>
+                <textarea id="message" name="message" rows="4" cols="50" placeholder="ひと言どうぞ"required></textarea><br>
                 <input type="submit" value="送信">
             </form>
         </div>
@@ -59,18 +59,22 @@
         <h2>今日のコメント</h2>
         <?php
         // DBからコメントを取得して表示する処理
-        require('db_connect.php'); // Include the file that establishes the database connection
+        require('db_connect.php'); // データベースへの接続情報を含むファイルを読み込む
 
-        $currentDate = date("Y-m-d");
-        $sql = "SELECT name, subject, message FROM comments WHERE DATE(created_at) = '$currentDate' ORDER BY id DESC";
+        $currentDate = date("Y-m-d"); // 今日の日付を取得
+        $sql = "SELECT name, subject, message, created_at FROM comments WHERE DATE(created_at) = '$currentDate' ORDER BY id DESC";
 
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                echo "宛先: " . $row["subject"] . " ";
-                echo "Name: " . $row["name"] . "<br>";
-                echo "ひとこと: " . $row["message"] . "<br><br>";
+                echo "To: " . $row["subject"] . "　　";
+                echo "From: " . $row["name"] . "　　　　　　　　　";
+                echo "Time: " . date("H時i分", strtotime($row["created_at"])) . "<br>";
+                $message = $row["message"];
+                $wrapped_message = wordwrap($message, 50, "<br>", true);
+                echo "ひとこと : " . $wrapped_message . "<br>";
+
             }
         } else {
             echo "今日のコメントはありません";
@@ -78,39 +82,40 @@
         // データベース接続を閉じる
         $conn->close();
         ?>
+    </section>
 
-        <?php
-        $nameErr = $emailErr = $messageErr = "";
-        $name = $email = $message = "";
+    <?php
+    $nameErr = $emailErr = $messageErr = "";
+    $name = $email = $message = "";
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if (empty($_POST["name"])) {
-                $nameErr = "名前は必須です";
-            } else {
-                $name = test_input($_POST["name"]);
-            }
-
-            if (empty($_POST["email"])) {
-                $emailErr = "メールアドレスは必須です";
-            } else {
-                $email = test_input($_POST["email"]);
-            }
-
-            if (empty($_POST["message"])) {
-                $messageErr = "メッセージは必須です";
-            } else {
-                $message = test_input($_POST["message"]);
-            }
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (empty($_POST["name"])) {
+            $nameErr = "名前は必須です";
+        } else {
+            $name = test_input($_POST["name"]);
         }
 
-        function test_input($data)
-        {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
+        if (empty($_POST["email"])) {
+            $emailErr = "メールアドレスは必須です";
+        } else {
+            $email = test_input($_POST["email"]);
         }
-        ?>
+
+        if (empty($_POST["message"])) {
+            $messageErr = "メッセージは必須です";
+        } else {
+            $message = test_input($_POST["message"]);
+        }
+    }
+
+    function test_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    ?>
     </section>
     <div class="footer">
         <a href="prior_comments.php" class="button">昨日までのコメントを表示する</a>

@@ -12,19 +12,21 @@
     <h1>昨日までのコメント</h1>
     <section>
         <?php
-        require('db_connect.php'); // Include the file that establishes the database connection
+        require('db_connect.php'); // データベースへの接続情報を含むファイルを読み込む
 
         $currentDate = date("Y-m-d");
 
-        $sql = "SELECT name, subject, message FROM comments WHERE DATE(created_at) < '$currentDate' ORDER BY id DESC";
-
+        $sql = "SELECT name, subject, message, created_at FROM comments WHERE DATE(created_at) < '$currentDate' ORDER BY id DESC";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                echo "宛先: " . $row["subject"] . " 　　";
-                echo "Name: " . $row["name"] . "<br>";
-                echo "ひとこと: " . $row["message"] . "<br><br>";
+                echo "To: " . $row["subject"] . "　　";
+                echo "From: " . $row["name"] . "　　　　　　　　　";
+                echo "Date: " . date("m月d日 H時i分", strtotime($row["created_at"])) . "<br>";
+                $message = $row["message"];
+                $wrapped_message = wordwrap($message, 50, "<br>", true);
+                echo "ひとこと : " . $wrapped_message . "<br>";
             }
         } else {
             echo "過去のコメントはありません";
@@ -32,15 +34,8 @@
         ?>
     </section>
     <div class="footer">
-    <a href="profile.php" class="button">戻る</a>
+        <a href="profile.php" class="button">戻る</a>
     </div>
 </body>
 
 </html>
-
-
-
-
-
-
-
